@@ -1,0 +1,7 @@
+fastapi>=0.110
+uvicorn[standard]>=0.29
+flask>=3.0
+lxml>=4.9
+grpcio>=1.60
+grpcio-tools>=1.60
+protobuf>=4.25
