@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from v1.users import app as app_v1
 from v2.users import app as app_v2
 
@@ -12,6 +13,20 @@ app = FastAPI(
 # Montagem das versões
 app.mount("/api/v1", app_v1)
 app.mount("/api/v2", app_v2)
+
+
+# CORS (opcional – restrinja se preferir)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # ex.: ["https://localhost:9443"]
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Healthcheck simples
+@app.get("/healthz")
+def healthz():
+    return {"status": "ok"}
 
 
 # --- Inicialização unificada (REST + SOAP + gRPC) ---

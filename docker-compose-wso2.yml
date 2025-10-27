@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  wso2am:
+    image: wso2/wso2am:4.3.0
+    container_name: wso2am
+    ports:
+      - "9443:9443"  # Consoles (Publisher, DevPortal, Admin)
+      - "8243:8243"  # Gateway HTTPS
+      - "8280:8280"  # Gateway HTTP
+    environment:
+      - TZ=America/Sao_Paulo
+      - JAVA_OPTS=-Xms1g -Xmx2g
+    networks: [api-network]
+
+  api-app:
+    build: .
+    networks: [api-network]
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "50051:50051"
+    command: python -u main.py
+
+networks:
+  api-network:
+    driver: bridge
