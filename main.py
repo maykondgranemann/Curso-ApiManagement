@@ -19,7 +19,7 @@ def _start_fastapi():
     """Inicia o servidor FastAPI (Uvicorn) na porta 8000."""
     import uvicorn
 
-    config = uvicorn.Config(app, host="0.0.0.0", port=8000, log_level="info")
+    config = uvicorn.Config(app, host="0.0.0.0", port=8080, log_level="info")
     server = uvicorn.Server(config)
     server.run()
 
@@ -29,7 +29,7 @@ def _start_flask_soap():
     from soap_server import app as flask_app
 
     # Evita problemas de sinal/reloader ao rodar em thread
-    flask_app.run(host="0.0.0.0", port=8001, use_reloader=False)
+    flask_app.run(host="0.0.0.0", port=8081, use_reloader=False)
 
 
 def _start_grpc():
